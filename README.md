@@ -40,7 +40,10 @@ pip install -r requirements.txt
 3. Enable Google Sheets API
 4. Create a Service Account
 5. Download the JSON credentials file
-6. Rename it to `credentials.json` and place in project root
+6. **For Replit**: Store the entire JSON content as a secret named `GOOGLE_SERVICE_ACCOUNT_JSON`
+7. **For Local Development**: Either:
+   - Store as environment variable: `GOOGLE_SERVICE_ACCOUNT_JSON='{"type":"service_account",...}'`
+   - Or create a `.env` file with: `GOOGLE_SERVICE_ACCOUNT_JSON={your-json-content}`
 
 #### Share Your Google Sheet:
 1. Create a new Google Sheet
@@ -49,10 +52,25 @@ pip install -r requirements.txt
 4. Give it "Editor" permissions
 
 ### 4. Environment Setup
+
+#### Required Environment Variables:
 ```bash
-# Set required environment variables (optional - defaults provided)
-export GOOGLE_CREDENTIALS=path/to/credentials.json
+# Google Service Account JSON (REQUIRED)
+export GOOGLE_SERVICE_ACCOUNT_JSON='{"type":"service_account","project_id":"..."}'
+
+# Optional variables
 export SESSION_SECRET=your-secret-key
+```
+
+#### For Replit:
+- Add `GOOGLE_SERVICE_ACCOUNT_JSON` to Replit Secrets
+- Paste your complete service account JSON as the value
+
+#### For Local Development:
+Create a `.env` file:
+```
+GOOGLE_SERVICE_ACCOUNT_JSON={"type":"service_account","project_id":"your-project",...}
+SESSION_SECRET=your-secret-key
 ```
 
 ## 🎯 Usage
