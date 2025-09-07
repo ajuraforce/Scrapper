@@ -1132,7 +1132,16 @@ class EnhancedJobRightScraper:
                 "https://www.googleapis.com/auth/drive"
             ]
             
-            creds = Credentials.from_service_account_file('credentials.json', scopes=scope)
+            # Load credentials from environment variable or .env file
+            import os
+            import json
+            
+            credentials_json = os.getenv('GOOGLE_SERVICE_ACCOUNT_JSON')
+            if not credentials_json:
+                raise ValueError("GOOGLE_SERVICE_ACCOUNT_JSON environment variable not found. Please set it with your service account credentials.")
+            
+            credentials_info = json.loads(credentials_json)
+            creds = Credentials.from_service_account_info(credentials_info, scopes=scope)
             gc = gspread.authorize(creds)
             spreadsheet = gc.open_by_key(sheet_id)
             
@@ -1293,7 +1302,17 @@ class EnhancedJobRightScraper:
                 "https://www.googleapis.com/auth/spreadsheets",
                 "https://www.googleapis.com/auth/drive"
             ]
-            creds = Credentials.from_service_account_file('credentials.json', scopes=scope)
+            
+            # Load credentials from environment variable
+            import os
+            import json
+            
+            credentials_json = os.getenv('GOOGLE_SERVICE_ACCOUNT_JSON')
+            if not credentials_json:
+                raise ValueError("GOOGLE_SERVICE_ACCOUNT_JSON environment variable not found")
+            
+            credentials_info = json.loads(credentials_json)
+            creds = Credentials.from_service_account_info(credentials_info, scopes=scope)
             gc = gspread.authorize(creds)
             
             # Extract sheet ID from URL
@@ -1357,7 +1376,17 @@ class EnhancedJobRightScraper:
                 "https://www.googleapis.com/auth/spreadsheets",
                 "https://www.googleapis.com/auth/drive"
             ]
-            creds = Credentials.from_service_account_file('credentials.json', scopes=scope)
+            
+            # Load credentials from environment variable
+            import os
+            import json
+            
+            credentials_json = os.getenv('GOOGLE_SERVICE_ACCOUNT_JSON')
+            if not credentials_json:
+                raise ValueError("GOOGLE_SERVICE_ACCOUNT_JSON environment variable not found")
+            
+            credentials_info = json.loads(credentials_json)
+            creds = Credentials.from_service_account_info(credentials_info, scopes=scope)
             gc = gspread.authorize(creds)
             
             # Extract sheet ID from URL
